@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>速递外卖-登录</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div id="father">
+        <img src="images/logo.png" alt="" class="logo" style="width: 400px; height: auto; border-radius: 50%;">
+        <p>
+            <label for="username">账号</label>
+            <input type="text" id="username" placeholder="请输入用户名">
+            <span class="tips">请输入正确的用户名</span>
+        </p>
+        <p>
+            <label for="passward">密码</label>
+            <input type="text" id="passward" placeholder="请输入密码">
+            <span class="tips">请输入正确的密码</span>
+        </p>
+        <div>
+            <button>登录</button>
+            <button>注册</button>
+        </div>
+    </div>
+    <script>
+        const father = document.getElementById('father');
+        const backgrounds = [
+            '#181616 url(images/beij.jpg) no-repeat center center fixed',
+            '#181616 url(images/beij2.jpg) no-repeat center center fixed',
+            '#181616 url(images/beij3.jpg) no-repeat center center fixed'
+        ];
+        let currentBackgroundIndex = 0;
+
+        // 点击切换背景
+        father.addEventListener('click', () => {
+            changeBackground();
+        });
+
+        // 自动切换背景
+        setInterval(() => {
+            changeBackground();
+        }, 5000); // 每隔 5 秒切换一次背景
+
+        // 切换背景函数
+        function changeBackground() {
+            currentBackgroundIndex = (currentBackgroundIndex + 1) % backgrounds.length;
+            father.style.background = backgrounds[currentBackgroundIndex];
+            father.style.backgroundSize = 'cover';
+        }
+    </script>
+</body>
+</html>
