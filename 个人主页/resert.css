@@ -1,0 +1,47 @@
+body,p,h2,h3{
+	margin: 0;
+}
+button,input{
+	padding: 0;
+	outline: none;
+	box-sizing: border-box;
+}
+button{
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+label,input{
+	vertical-align: middle;
+}
+ui{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+a{
+	text-decoration: none;
+}
+table{
+	border-collapse: collapse;
+}
+/* 在线链接服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+	font-family: 'iconfont';  /* Project id 4891331 */
+	src: 
+		 url('http://at.alicdn.com/t/c/font_4891331_kewlhuiw49.woff2?t=1744541176294') format('woff2'),
+		 url('http://at.alicdn.com/t/c/font_4891331_kewlhuiw49.woff?t=1744541176294') format('woff'),
+		 url('http://at.alicdn.com/t/c/font_4891331_kewlhuiw49.ttf?t=1744541176294') format('truetype');
+  }
+  .iconfont{
+    font-family:"iconfont" !important;
+    font-size:16px;font-style:normal;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;}
+
+
+
+
+
+

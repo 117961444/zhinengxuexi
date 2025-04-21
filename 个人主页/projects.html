@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刘王子 - 项目经历详情</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 全局样式 */
+    :root {
+      --primary-red: #ff4757;
+      --dark-bg: #2d3436;
+      --card-bg: #353b48;
+      --text-light: #f5f6fa;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+      padding-bottom: 80px; /* 为固定页脚预留空间 */
+    }
+    /* 页头样式 */
+    .hero-header {
+      background: linear-gradient(135deg, var(--primary-red) 0%, #c0392b 100%);
+      padding: 2rem 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    /* 导航栏 */
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-link:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+    .nav-link.active {
+      background: white;
+      color: var(--primary-red);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    /* 下拉菜单 */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--card-bg);
+      min-width: 180px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background: var(--primary-red);
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* 主要内容区域 */
+    .main-content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    /* 时间线样式 */
+    .edu-timeline {
+      position: relative;
+      padding-left: 30px;
+      margin: 2rem 0;
+    }
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      bottom: 10px;
+      width: 4px;
+      background: var(--primary-red);
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      padding: 1.5rem;
+      margin-left: 2rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      margin-bottom: 1rem;
+    }
+    .timeline-item:hover {
+      transform: translateX(10px);
+    }
+    .timeline-item h4 {
+      margin: 1rem 0 0.5rem;
+    }
+    .timeline-item ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin: 0.5rem 0 1rem 0;
+    }
+    .timeline-item p {
+      margin: 0.5rem 0;
+    }
+    /* 页脚样式 */
+    .footer {
+      text-align: center;
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero-header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="logo.png" alt="刘王子" class="avatar">
+        <h1>刘王子<br><span style="font-size: 0.8em;">全栈开发者</span></h1>
+      </div>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i>首页</a>
+        <a href="projects.html" class="nav-link active"><i class="fas fa-code"></i>项目</a>
+        <a href="awards.html" class="nav-link"><i class="fas fa-trophy"></i>获奖</a>
+        <div class="dropdown">
+          <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i>联系</a>
+          <div class="dropdown-content">
+            <a href="mailto:xiaoliu@xxxxxx.com"><i class="fas fa-envelope"></i> xliu@xxxxxx.com</a>
+            <a href="tel:17515262099"><i class="fas fa-phone"></i> 175-1526-2099</a>
+            <a href="#"><i class="fab fa-weixin"></i> 117961444a</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- 项目经历扩写 -->
+    <section class="section-card">
+      <h2><i class="fas fa-rocket"></i> 项目经历详情</h2>
+      
+      <!-- 项目一：校园导航小程序 -->
+      <div class="edu-timeline">
+        <div class="timeline-item">
+          <h3>校园导航小程序</h3>
+          <p class="time-period">202X年X月 - 202X年X月</p>
+          <p><strong>项目背景：</strong>为了解决校园内定位导航问题，提高新生及访客的体验，团队基于微信小程序开发了校园导航系统。</p>
+          <p><strong>项目描述：</strong>该系统融合了地图导航、建筑搜索与路线规划等多项功能，实时展示校园内各项设施信息，并支持快速定位。</p>
+          <p><strong>功能亮点：</strong></p>
+          <ul>
+            <li>校园地图实时更新，具备高清图层</li>
+            <li>建筑物信息详尽，包括简介、照片及开放时间</li>
+            <li>路线规划功能支持步行、校车等多种模式</li>
+            <li>支持二维码扫描，快速获取建筑详情</li>
+          </ul>
+          <p><strong>技术难点：</strong></p>
+          <ul>
+            <li>地图数据与实时位置匹配</li>
+            <li>大量数据的高效加载与缓存</li>
+            <li>微信小程序平台的多终端适配</li>
+          </ul>
+          <p><strong>我的角色：</strong>负责前端页面设计与交互实现，协调后端接口对接，优化用户体验。</p>
+          <h4>使用技术：</h4>
+          <ul>
+            <li><i class="fas fa-code"></i> Vue.js</li>
+            <li><i class="fas fa-code"></i> Node.js</li>
+            <li><i class="fas fa-code"></i> MongoDB</li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- 项目二：AI 智能问答系统 -->
+      <div class="edu-timeline">
+        <div class="timeline-item">
+          <h3>AI 智能问答系统</h3>
+          <p class="time-period">202X年X月 - 202X年X月</p>
+          <p><strong>项目背景：</strong>随着人工智能技术的发展，用户对智能交互的需求日益增强，团队决定开发一款基于自然语言处理的问答系统。</p>
+          <p><strong>项目描述：</strong>该系统利用 NLP 技术对用户提问进行解析，并结合深度学习模型给出精准答案。系统支持多领域知识问答，具备自我学习与优化能力。</p>
+          <p><strong>功能亮点：</strong></p>
+          <ul>
+            <li>支持语义理解与上下文跟踪</li>
+            <li>动态调整答案推荐，提升回答准确率</li>
+            <li>提供多领域知识库接口扩展</li>
+            <li>简洁直观的对话交互界面</li>
+          </ul>
+          <p><strong>技术难点：</strong></p>
+          <ul>
+            <li>多轮对话的上下文管理</li>
+            <li>大规模数据训练与实时推理</li>
+            <li>系统稳定性与高并发响应</li>
+          </ul>
+          <p><strong>我的角色：</strong>主要负责数据模型构建与接口设计，同时进行 Flask 后端服务的开发与部署。</p>
+          <h4>使用技术：</h4>
+          <ul>
+            <li><i class="fas fa-code"></i> Python</li>
+            <li><i class="fas fa-code"></i> TensorFlow</li>
+            <li><i class="fas fa-code"></i> Flask</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>📱 175-1526-2099 | 📧 xiaoliu@xxxxxx.com</p>
+    <p>© 2025 刘王子 - 持续进步中</p>
+  </footer>
+</body>
+</html>

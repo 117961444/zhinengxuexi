@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>速递外卖 - 获奖情况</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 全局样式 */
+    :root {
+      --primary-red: #ff4757;
+      --dark-bg: #2d3436;
+      --card-bg: #353b48;
+      --text-light: #f5f6fa;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+      padding-bottom: 80px; /* 为固定页脚预留空间 */
+    }
+    /* 页头样式 */
+    .hero-header {
+      background: linear-gradient(135deg, var(--primary-red) 0%, #c0392b 100%);
+      padding: 2rem 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    /* 导航栏 */
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-link:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+    .nav-link.active {
+      background: white;
+      color: var(--primary-red);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    /* 下拉菜单 */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--card-bg);
+      min-width: 180px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background: var(--primary-red);
+    }
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* 主要内容区域 */
+    .main-content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    /* 时间线样式 */
+    .edu-timeline {
+      position: relative;
+      padding-left: 30px;
+      margin: 2rem 0;
+    }
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      bottom: 10px;
+      width: 4px;
+      background: var(--primary-red);
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      padding: 1.5rem;
+      margin-left: 2rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      margin-bottom: 1rem;
+    }
+    .timeline-item:hover {
+      transform: translateX(10px);
+    }
+    .timeline-item h4 {
+      margin: 1rem 0 0.5rem;
+    }
+    .timeline-item p {
+      margin: 0.5rem 0;
+    }
+    .timeline-item ul {
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin: 0.5rem 0 1rem 0;
+    }
+    /* 图片样式 */
+    .award-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      object-fit: cover;
+      margin: 1rem 0;
+      border: 2px solid var(--primary-red);
+      cursor: pointer; /* 鼠标悬停时显示为可点击 */
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .award-photo:hover {
+      transform: scale(1.1); /* 鼠标悬停时放大 */
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* 添加阴影效果 */
+    }
+
+    /* 放大图片的模态框 */
+    .modal {
+      display: none; /* 默认隐藏 */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8); /* 半透明背景 */
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      cursor: pointer; /* 鼠标变为可点击 */
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      pointer-events: none; /* 防止点击图片本身关闭模态框 */
+    }
+
+    .modal:target {
+      display: flex; /* 显示模态框 */
+    }
+    /* 页脚样式 */
+    .footer {
+      text-align: center;
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 页头 -->
+  <header class="hero-header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="logo.png" alt="刘王子" class="avatar">
+        <h1>速递外卖<br><span style="font-size: 0.8em;">选择我们</span></h1>
+      </div>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link"><i class="fas fa-home"></i>首页</a>
+        <a href="projects.html" class="nav-link"><i class="fas fa-code"></i>项目</a>
+        <a href="awards.html" class="nav-link active"><i class="fas fa-trophy"></i>获奖</a>
+        <div class="dropdown">
+          <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i>联系</a>
+          <div class="dropdown-content">
+            <a href="mailto:xiaoliu@xxxxxx.com"><i class="fas fa-envelope"></i> xliu@xxxxxx.com</a>
+            <a href="tel:17515262099"><i class="fas fa-phone"></i> 175-1526-2099</a>
+            <a href="#"><i class="fab fa-weixin"></i> 117961444a</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 主体内容 -->
+  <main class="main-content">
+    <!-- 获奖情况扩写 -->
+    <section class="section-card">
+      <h2><i class="fas fa-trophy"></i> 获奖情况</h2>
+      
+      <!-- 奖项一：202X年湘潭市“数字生活服务创新奖” -->
+      <div class="edu-timeline">
+        <div class="timeline-item">
+          <h3>202X年湘潭市“数字生活服务创新奖”</h3>
+          <p class="time-period">202X年X月</p>
+          <p><strong>奖项说明：</strong>在激烈的省内外竞赛中获得二等奖，证明了我们平台的便利与优越。</p>
+          <p><strong>图片：</strong></p>
+          <a href="#modal1">
+            <img src="im3.jpg" alt="202X年湘潭市“数字生活服务创新奖”" class="award-photo">
+          </a>
+        </div>
+      </div>
+
+      <!-- 模态框 -->
+      <div id="modal1" class="modal" onclick="location.href='#'">
+        <img src="im3.jpg" alt="全国大学生程序设计竞赛二等奖">
+      </div>
+      
+      <!-- 202X年湘潭雨湖区“社区服务标杆企业”​​ -->
+      <div class="edu-timeline">
+        <div class="timeline-item">
+          <h3>202X年湘潭雨湖区“社区服务标杆企业”​​</h3>
+          <p class="time-period">202X年X月</p>
+          <p><strong>奖项说明：</strong>首创“社区团长+即时配送”模式，解决老旧小区配送难题。</p>
+          <p><strong>图片：</strong></p>
+          <a href="#modal2">
+            <img src="jiang1.jpg" alt=202X年湘潭雨湖区“社区服务标杆企业” class="award-photo">
+          </a>
+        </div>
+      </div>
+
+      <!-- 模态框 -->
+      <div id="modal2" class="modal" onclick="location.href='#'">
+        <img src="jiang1.jpg" alt=202X年湘潭雨湖区“社区服务标杆企业”>
+      </div>
+      
+      <!-- 202X年上海市“健康饮食创新项目奖” -->
+      <div class="edu-timeline">
+        <div class="timeline-item">
+          <h3>202X年上海市“健康饮食创新项目奖”</h3>
+          <p class="time-period">202X年X月</p>
+          <p><strong>奖项说明：</strong>联合营养师推出企业团餐定制服务，主打低GI（升糖指数）工作餐。</p>
+          <p><strong>图片：</strong></p>
+          <a href="#modal3">
+            <img src="jiang2.jpg" alt=202X年上海市“健康饮食创新项目奖” class="award-photo">
+          </a>
+        </div>
+      </div>
+
+      <!-- 模态框 -->
+      <div id="modal3" class="modal" onclick="location.href='#'">
+        <img src="jiang2.jpg" alt=202X年上海市“健康饮食创新项目奖”>
+      </div>
+      
+    </section>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="footer">
+    <p>📱 175-1526-2099 | 📧 xiaoliu@xxxxxx.com</p>
+    <p>© 2025 刘王子 - 持续进步中</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="productor.css">
+    <link rel="stylesheet" href="resert.css">
+</head>
+<body>
+    <div id="father">
+        <!-- 左侧固定区域 -->
+        <div id="sun">
+            <a href="">
+                <img src="logo-.png" class="logo" alt="Logo">
+            </a>
+            <div class="massage">
+                <p>速递外卖</p>
+                <p>我们真诚</p>
+                <p> &nbsp;&nbsp;欢迎您的到来！</p>
+            </div>
+            <div class="action">
+                <button onclick="location.href='index.html'">
+                    <span class="iconfont">&#xe629;</span> 个人主页/登录
+                </button>
+                <button onclick="location.href='projects.html'">
+                    <span class="iconfont">&#xe607;</span> 开始下单
+                </button>
+                <button onclick="location.href='awards.html'">
+                    <span class="iconfont">&#xe7e1;</span> 关于我们
+                </button>
+                <button onclick="window.close()">
+                    <span class="iconfont">&#xe659;</span> 退出
+                </button>
+            </div>
+        </div>
+        <!-- 右侧区域 -->
+        <div id="nav">
+            <!-- 图片轮播区域 -->
+            <div id="carousel">
+                <div class="carousel-images">
+                    <img src="im1.jpg" alt="个人信息" class="active">
+                    <img src="im2.jpg" alt="项目生涯">
+                    <img src="im3.jpg" alt="奖项">
+                </div>
+            </div>
+
+            <!-- 页脚区域 -->
+            <div id="footer">
+                © 2025 刘王子 - 持续进步中
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 图片轮播逻辑
+        const images = document.querySelectorAll('.carousel-images img');
+        let current = 0;
+
+        setInterval(() => {
+            images[current].classList.remove('active');
+            current = (current + 1) % images.length;
+            images[current].classList.add('active');
+        }, 3000); // 每 3 秒切换一次图片
+    </script>
+</body>
+</html>

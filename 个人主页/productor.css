@@ -1,0 +1,158 @@
+/* ========== 通用样式 ========== */
+/* 透明链接层样式（如有需要，可保留） */
+.nav-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+body {
+    background:  #2b2525 no-repeat top;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+/* ========== 左侧固定区域 (#sun) ========== */
+#sun {
+    width: 300px; /* 固定宽度 */
+    height: 100vh; /* 占满视口高度 */
+    position: relative; /* 确保不被覆盖 */
+    background-color: #2b2525;
+    padding: 20px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 1; /* 保证在右侧区域上方 */
+}
+
+.logo {
+    width: 100%;
+    display: block;
+    margin: 30px auto;
+}
+
+.massage {
+    width: 200px;
+    box-sizing: border-box;
+    padding: 30px 0;
+    margin: 0 auto 30px;
+    color: #fff;
+    line-height: 40px;
+    text-align: center;
+    position: relative;
+    top: -40px;
+}
+
+.massage::before,
+.massage::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    left: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+}
+
+.massage::before {
+    top: 0;
+}
+
+.massage::after {
+    bottom: 0;
+}
+
+.action {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.action button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #e74c3c;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.action button:hover {
+    background-color: #c0392b;
+}
+
+/* ========== 父容器布局 ========== */
+#father {
+    display: flex; /* 左右并排布局 */
+    height: 100vh; /* 占满视口高度 */
+}
+
+/* ========== 右侧区域 (#nav) ========== */
+#nav {
+    flex: 1; /* 占据剩余空间 */
+    height: 100vh; /* 高度与父容器一致 */
+    background-size: cover;
+    background-position: center;
+    position: relative; /* 确保不遮挡 #sun */
+    z-index: 0; /* 层级低于 #sun */
+    display: flex; /* 使用 flex 布局 */
+    flex-direction: column; /* 垂直布局 */
+}
+
+/* ========== 图片轮播区域 (#carousel) ========== */
+/* 占据 #sun 右侧所有区域 */
+#carousel {
+    flex: 1; /* 占据 #nav 的上部分 */
+    width: 100%; /* 占满 #nav 的宽度 */
+    height: 100%; /* 占满 #nav 的高度 */
+    overflow: hidden;
+    background-color: #000; /* 防止图片切换时出现空白 */
+}
+
+/* 图片轮播内容 */
+.carousel-images {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.carousel-images img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0; /* 默认不可见 */
+    transition: opacity 1s ease-in-out;
+}
+
+.carousel-images img.active {
+    opacity: 1; /* 当前显示图片 */
+    z-index: 1;
+}
+
+/* ========== 可选全局背景切换动画（如需要全局背景效果） ========== */
+@keyframes backgroundChange {
+    0% { background-image: url('im1.jpg'); }
+    33% { background-image: url('im2.jpg'); }
+    66% { background-image: url('im3.jpg'); }
+    100% { background-image: url('im1.jpg'); }
+}
+
+/* 页脚区域 */
+#footer {
+    height: 50px; /* 固定高度 */
+    background-color: #2b2525;
+    color: #fff;
+    text-align: center;
+    line-height: 50px;
+    font-size: 14px;
+}

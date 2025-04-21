@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>刘王子 - 全栈开发者</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 全局样式 */
+    :root {
+      --primary-red: #ff4757;
+      --dark-bg: #2d3436;
+      --card-bg: #353b48;
+      --text-light: #f5f6fa;
+    }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--dark-bg);
+      color: var(--text-light);
+      line-height: 1.6;
+      padding-bottom: 80px; /* 为固定页脚预留空间 */
+    }
+    /* 页头样式 */
+    .hero-header {
+      background: linear-gradient(135deg, var(--primary-red) 0%, #c0392b 100%);
+      padding: 2rem 1.5rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 3px solid white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    /* 导航栏 */
+    .nav-menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      padding: 0.8rem 1.2rem;
+      border-radius: 30px;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-link:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-2px);
+    }
+    .nav-link.active {
+      background: white;
+      color: var(--primary-red);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    /* 下拉菜单 */
+    .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: var(--card-bg);
+      min-width: 180px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+    }
+    .dropdown-content a {
+      color: var(--text-light);
+      padding: 10px 16px;
+      text-decoration: none;
+      display: block;
+    }
+    .dropdown-content a:hover {
+      background: var(--primary-red);
+    }
+    /* 鼠标悬停显示下拉菜单 */
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    /* 主要内容区域 */
+    .main-content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    /* 时间线样式 */
+    .edu-timeline {
+      position: relative;
+      padding-left: 30px;
+      margin: 2rem 0;
+    }
+    .edu-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      bottom: 10px;
+      width: 4px;
+      background: var(--primary-red);
+      border-radius: 2px;
+    }
+    .timeline-item {
+      position: relative;
+      padding: 1.5rem;
+      margin-left: 2rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      transition: transform 0.3s ease;
+      margin-bottom: 1rem;
+    }
+    .timeline-item:hover {
+      transform: translateX(10px);
+    }
+    .timeline-item h4 {
+      margin: 1rem 0 0.5rem;
+    }
+    .timeline-item ul {
+      list-style: none;
+      padding-left: 1rem;
+    }
+    .timeline-item li {
+      margin: 0.5rem 0;
+    }
+    /* 技能进度条 */
+    .skill-meter {
+      height: 12px;
+      background: rgba(255,255,255,0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      position: relative;
+    }
+    .skill-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-red), #ff6b6b);
+      width: 0;
+      transition: width 1s ease-in-out;
+    }
+    /* 技术能力 */
+    .skill-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .skill-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+    /* 求职卡片 */
+    .job-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .job-card {
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    .job-card:hover {
+      transform: translateY(-5px);
+    }
+    /* 页脚样式 */
+    .footer {
+      text-align: center; /* 居中对齐 */
+      background-color: var(--dark-bg);
+      color: var(--text-light);
+      padding: 20px 0;
+      font-size: 14px;
+    }
+    /* 响应式设计 */
+    @media (max-width: 768px) {
+      .header-container {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .nav-menu {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero-header">
+    <div class="header-container">
+      <div class="brand">
+        <img src="logo.png" alt="刘王子" class="avatar">
+        <h1>刘王子<br><span style="font-size: 0.8em;">全栈开发者</span></h1>
+      </div>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link active"><i class="fas fa-home"></i>首页</a>
+        <a href="projects.html" class="nav-link"><i class="fas fa-code"></i>项目</a>
+        <a href="awards.html" class="nav-link"><i class="fas fa-trophy"></i>获奖</a>
+        <div class="dropdown">
+          <a href="contact.html" class="nav-link"><i class="fas fa-envelope"></i>联系</a>
+          <div class="dropdown-content">
+            <a href="mailto:xiaoliu@xxxxxx.com"><i class="fas fa-envelope"></i>  xliu@xxxxxx.com</a>
+            <a href="tel:17515262099"><i class="fas fa-phone"></i> 175-1526-2099</a>
+            <a href="#"><i class="fab fa-weixin"></i> 117961444a</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <!-- 教育背景 -->
+    <section class="section-card">
+      <h2><i class="fas fa-graduation-cap"></i> 教育背景</h2>
+      <div class="edu-timeline">
+        <div class="timeline-item">
+          <h3>湘潭大学 · 计算机科学与技术 (本科)</h3>
+          <p class="time-period">2023年9月 - 2027年6月</p>
+          <h4>主修课程：</h4>
+          <ul class="course-list">
+            <li><i class="fas fa-star"></i> 数据结构</li>
+            <li><i class="fas fa-star"></i> 数据库原理</li>
+            <li><i class="fas fa-star"></i> 计算机网络</li>
+            <li><i class="fas fa-star"></i> XXXXXX</li>
+          </ul>
+          <h4>专业技能：</h4>
+          <ul class="skill-list">
+            <li><i class="fas fa-check"></i> 熟练掌握 Java、Python，熟悉 Spring Boot 框架</li>
+            <li><i class="fas fa-check"></i> 熟悉 MySQL、Redis 数据库优化</li>
+            <li><i class="fas fa-check"></i> 掌握前端开发：HTML5、CSS3、JavaScript</li>
+            <li><i class="fas fa-check"></i> 熟悉 Linux 操作系统和 Shell 脚本</li>
+            <li><i class="fas fa-check"></i> 具备良好的团队协作能力和项目管理经验</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 项目经历 -->
+    <section class="section-card">
+      <h2><i class="fas fa-rocket"></i> 项目经历</h2>
+      <div class="edu-timeline">
+        <div class="timeline-item">
+          <h3>校园导航小程序</h3>
+          <p class="time-period">202X年X月 - 202X年X月</p>
+          <p>基于微信小程序开发的校园导航系统，提供地图导航、建筑搜索、路线规划等功能。</p>
+          <h4>技术：</h4>
+          <ul class="course-list">
+            <li><i class="fas fa-code"></i> Vue.js</li>
+            <li><i class="fas fa-code"></i> Node.js</li>
+            <li><i class="fas fa-code"></i> MongoDB</li>
+          </ul>
+        </div>
+        <div class="timeline-item">
+          <h3>AI 智能问答系统</h3>
+          <p class="time-period">202X年X月 - 202X年X月</p>
+          <p>基于 NLP 的智能问答系统，能够自动解析用户提问并提供精准答案。</p>
+          <h4>技术：</h4>
+          <ul class="course-list">
+            <li><i class="fas fa-code"></i> Python</li>
+            <li><i class="fas fa-code"></i> TensorFlow</li>
+            <li><i class="fas fa-code"></i> Flask</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 技术能力 -->
+    <section class="section-card">
+      <h2><i class="fas fa-laptop-code"></i> 技术栈</h2>
+      <div class="skill-container">
+        <div class="skill-item">
+          <h4>Java &amp; Spring Boot</h4>
+          <div class="skill-meter">
+            <div class="skill-progress" style="width: 85%"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <h4>Python &amp; Django</h4>
+          <div class="skill-meter">
+            <div class="skill-progress" style="width: 80%"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <h4>前端开发 (HTML5, CSS3, JavaScript)</h4>
+          <div class="skill-meter">
+            <div class="skill-progress" style="width: 75%"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <h4>数据库 (MySQL, Redis)</h4>
+          <div class="skill-meter">
+            <div class="skill-progress" style="width: 70%"></div>
+          </div>
+        </div>
+        <div class="skill-item">
+          <h4>Linux 与 Shell 脚本</h4>
+          <div class="skill-meter">
+            <div class="skill-progress" style="width: 65%"></div>
+          </div>
+        </div>
+        <!-- 更多技能项 -->
+      </div>
+    </section>
+
+    <!-- 求职意向 -->
+    <section class="section-card">
+      <h2><i class="fas fa-briefcase"></i> 求职意向</h2>
+      <div class="job-grid">
+        <div class="job-card">
+          <i class="fas fa-bullseye fa-2x"></i>
+          <h3>求职信息</h3>
+          <p><strong>目标职位：</strong>开发工程师</p>
+          <p><strong>到岗时间：</strong>可随时到岗</p>
+          <p><strong>期望薪资：</strong>8000 - 10000 元</p>
+        </div>
+        <!-- 更多求职卡片 -->
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // 添加进度条动画
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.skill-progress').forEach(progress => {
+        progress.style.width = progress.style.width;
+      });
+    });
+  </script>
+
+  <footer class="footer">
+    <p>📱 175-1526-2099 | 📧 xiaoliu@xxxxxx.com</p>
+    <p>© 2025 刘王子 - 持续进步中</p>
+  </footer>
+</body>
+</html>
